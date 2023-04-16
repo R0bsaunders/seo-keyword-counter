@@ -54,8 +54,7 @@ let userCopy = {
 displaySearchTerms();
 
 // Add event listener to copy box on any change
-userData.addEventListener("keydown", function(event) {
-console.log("changes");
+userData.addEventListener("keyup", function(event) {
 document.getElementById("copiedData").innerText = userData.value;
 
 });
