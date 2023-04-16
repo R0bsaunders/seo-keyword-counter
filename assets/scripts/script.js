@@ -214,7 +214,7 @@ function removeSpaces(data) {
 function checkOccurrences(data) {
 
     let allWordsArray = userCopy.content.match(/\b(\w+)\b/g)
-    const duplicates = [];
+    const duplicates = {};
     allWordsArray.forEach(function(x) { duplicates[x] = (duplicates[x] || 0) +1; });
 
     let uniqueWords = [...new Set(allWordsArray)];
