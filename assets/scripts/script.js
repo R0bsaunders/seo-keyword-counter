@@ -121,10 +121,11 @@ clearStorageBtn.addEventListener("click", function(event) {
 
 });
 
-// Removes the entire search history key from local storage
+// Removes the entire search history key from local storage and clears the local searched terms array variable
 function removeData() {
 
-    localStorage.clear("searchTerms")
+    localStorage.clear();
+    userCopy.wordsArray = []
     displaySearchTerms();
 
 };
