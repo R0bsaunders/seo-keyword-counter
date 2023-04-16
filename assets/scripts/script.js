@@ -52,6 +52,7 @@ let userCopy = {
 };
 
 displaySearchTerms();
+displayUserContent();
 
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function(event) {
@@ -78,15 +79,15 @@ function displaySearchTerms() {
     } else {
 
         // Check to see if the search term already exists so get local storage searchTerms key and convert the string into an array
-        parsed = JSON.parse(localStorage.searchTerms);
-        userCopy.wordsArray = parsed;
+        let parsedSearches = JSON.parse(localStorage.searchTerms);
+        userCopy.wordsArray = parsedSearches;
         document.getElementById("searchTermList").innerHTML="";
 
         // Run a loop that checks for search term so that the entire argument can be broken if the search exists already
-        for (let i = 0; i < parsed.length; i++) {
+        for (let i = 0; i < parsedSearches.length; i++) {
 
             let listedTerm = document.createElement('li');
-            let textContent = document.createTextNode(`${parsed[i]}`)
+            let textContent = document.createTextNode(`${parsedSearches[i]}`)
             listedTerm.appendChild(textContent);
             document.getElementById("searchTermList").appendChild(listedTerm);
 
@@ -94,6 +95,22 @@ function displaySearchTerms() {
     };
 };
 
+// Display user content if already in local storage
+function displayUserContent() {
+
+    // Checks if there is already data stored
+    if (!localStorage.userContent) {
+
+        userData.placeholder="Enter your content here";
+        return;
+
+    };
+
+    // Place the stored data into the content box
+    let parsedContent = JSON.parse(localStorage.userContent)
+    userData.value = parsedContent
+
+}
 // Test user's entry and either fail or trigger adding to storage
 function addSearchTerm() {
 
