@@ -56,6 +56,7 @@ displaySearchTerms();
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function(event) {
 document.getElementById("copiedData").innerText = userData.value;
+addUserCopy()
 
 });
 
@@ -175,6 +176,7 @@ function clearSearch() {
 // Add user copy to local storage
 function addUserCopy() {
 
+    localStorage.setItem("userContent", JSON.stringify(userData.value));
 
 };
 
