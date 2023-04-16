@@ -41,13 +41,13 @@ const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
 const userData = document.querySelector("#userData")
-const copiedData = document.querySelector("#copiedData")
+const occurrencesList = document.querySelector("#occurrencesList")
 
 
 let searchTerms = [];
 
 let userCopy = {
-    lowercase: "",
+    content: "",
     wordsArray: []
 };
 
@@ -56,7 +56,6 @@ displayUserContent();
 
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function(event) {
-document.getElementById("copiedData").innerText = userData.value;
 addUserCopy()
 
 });
@@ -108,9 +107,11 @@ function displayUserContent() {
 
     // Place the stored data into the content box
     let parsedContent = JSON.parse(localStorage.userContent)
-    userData.value = parsedContent
+    userData.value = parsedContent;
+    userCopy.content = parsedContent;
 
-}
+};
+
 // Test user's entry and either fail or trigger adding to storage
 function addSearchTerm() {
 
@@ -194,6 +195,7 @@ function clearSearch() {
 function addUserCopy() {
 
     localStorage.setItem("userContent", JSON.stringify(userData.value));
+    checkOccurrences();
 
 };
 
@@ -211,9 +213,28 @@ function removeSpaces(data) {
 
 function checkOccurrences(data) {
 
+    let allWordsArray = userCopy.content.match(/\b(\w+)\b/g)
+    const duplicates = [];
+    allWordsArray.forEach(function(x) { duplicates[x] = (duplicates[x] || 0) +1; });
+
+    let uniqueWords = [...new Set(allWordsArray)];
+    console.log(uniqueWords);
+    console.log(duplicates);
+    displayAllWords(uniqueWords);
+
 };
 
 function calculateHeatMap(data) {
 
 };
 
+function displayAllWords(data) {
+    for (let i = 0; i < data.length; i++) {
+
+        let listedTerm = document.createElement('li');
+        let textContent = document.createTextNode(`${data[i]}`)
+        listedTerm.appendChild(textContent);
+        document.getElementById("occurrencesList").appendChild(listedTerm);
+
+    };
+}
