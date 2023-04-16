@@ -164,6 +164,11 @@ function clearSearch() {
 
 };
 
+// Add user copy to local storage
+function addUserCopy() {
+
+};
+
 function convertLowercase(data) {
 
 };
@@ -184,6 +189,3 @@ function calculateHeatMap(data) {
 
 };
 
-function addUserCopy(data) {
-
-};
