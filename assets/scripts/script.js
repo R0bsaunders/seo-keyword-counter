@@ -40,16 +40,23 @@ const searchTermEntry = document.querySelector("#searchTermEntry");
 const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
+const userData = document.querySelector("#userData")
+
 
 let searchTerms = [];
 
 let userCopy = {
-    content: "",
     lowercase: "",
     wordsArray: []
 };
 
 displaySearchTerms();
+
+// Add event listener to copy box on any change
+userData.addEventListener("keydown", function(event) {
+console.log("changes");
+
+});
 
 // Event listener onto the add search term button
 addButton.addEventListener("click", function(event) {
@@ -166,6 +173,7 @@ function clearSearch() {
 
 // Add user copy to local storage
 function addUserCopy() {
+
 
 };
 
