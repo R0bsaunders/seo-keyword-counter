@@ -41,6 +41,7 @@ const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
 const userData = document.querySelector("#userData")
+const copiedData = document.querySelector("#copiedData")
 
 
 let searchTerms = [];
@@ -55,6 +56,7 @@ displaySearchTerms();
 // Add event listener to copy box on any change
 userData.addEventListener("keydown", function(event) {
 console.log("changes");
+document.getElementById("copiedData").innerText = userData.value;
 
 });
 
