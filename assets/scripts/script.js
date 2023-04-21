@@ -94,13 +94,28 @@ function displaySearchTerms() {
     };
 };
 
+function displayAllWords(data) {
+
+    document.getElementById("occurrencesList").innerHTML = "";
+
+    for (let i = 0; i < data.length; i++) {
+
+        let listedTerm = document.createElement('li');
+        let textContent = document.createTextNode(`${data[i]}`)
+        listedTerm.appendChild(textContent);
+        document.getElementById("occurrencesList").appendChild(listedTerm);
+
+    };
+}
+
 // Display user content if already in local storage
 function displayUserContent() {
 
     // Checks if there is already data stored
     if (!localStorage.userContent) {
-
+        userData.value = ""
         userData.placeholder="Enter your content here";
+
         return;
 
     };
@@ -146,6 +161,8 @@ clearStorageBtn.addEventListener("click", function(event) {
     event.preventDefault();
     removeData()
 
+
+
 });
 
 // Removes the entire search history key from local storage and clears the local searched terms array variable
@@ -153,8 +170,10 @@ function removeData() {
 
     localStorage.clear();
     userCopy.wordsArray = []
+    userCopy.content = ""
+    document.getElementById("occurrencesList").innerHTML = "";
     displaySearchTerms();
-
+    displayUserContent();
 };
 
 // Check if a keyword has is already present in local storage
@@ -212,14 +231,20 @@ function removeSpaces(data) {
 };
 
 function checkOccurrences(data) {
+    // Fetch copy string from local storage and convert it to a string
+    parsedCopy = JSON.parse(localStorage.userContent)
 
-    let allWordsArray = userCopy.content.match(/\b(\w+)\b/g)
+    // Create an array containing all the words
+    let allWordsArray = parsedCopy.match(/\b(\w+)\b/g)
     const duplicates = {};
     allWordsArray.forEach(function(x) { duplicates[x] = (duplicates[x] || 0) +1; });
 
+    // Create an array with only one instance of words, no duplicates 
     let uniqueWords = [...new Set(allWordsArray)];
     console.log(uniqueWords);
     console.log(duplicates);
+
+    // Call function to display the words as a list item for testing
     displayAllWords(uniqueWords);
 
 };
@@ -228,13 +253,3 @@ function calculateHeatMap(data) {
 
 };
 
-function displayAllWords(data) {
-    for (let i = 0; i < data.length; i++) {
-
-        let listedTerm = document.createElement('li');
-        let textContent = document.createTextNode(`${data[i]}`)
-        listedTerm.appendChild(textContent);
-        document.getElementById("occurrencesList").appendChild(listedTerm);
-
-    };
-}
