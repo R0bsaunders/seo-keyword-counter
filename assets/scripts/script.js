@@ -50,13 +50,20 @@ let userCopy = {
     content: "",
     wordsArray: []
 };
-
+let allWords = [];
+let searchTermCount = {};
 displaySearchTerms();
 displayUserContent();
+checkOccurrences();
+checkMatches();
 
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function(event) {
 addUserCopy()
+checkOccurrences()
+checkMatches();
+
+
 
 });
 
@@ -65,6 +72,7 @@ addButton.addEventListener("click", function(event) {
 
     event.preventDefault();
     addSearchTerm();
+    checkMatches()
 });
 
 // Render user specified keywords and anything already in local storage
@@ -214,7 +222,7 @@ function clearSearch() {
 function addUserCopy() {
 
     localStorage.setItem("userContent", JSON.stringify(userData.value));
-    checkOccurrences();
+
 
 };
 
@@ -222,7 +230,35 @@ function convertLowercase(data) {
 
 };
 
-function extractWords(data) {
+function checkMatches() {
+   
+        // Check to see if local storage is empty. if not, run check occurrences
+    if (localStorage.searchTerms) {
+        checkOccurrences()
+    };
+
+    let foundWords=[];
+
+    // Check to see if any of the user's search terms are contained in the list of words array and create a new array with matches
+    for (let i = 0; i < userCopy.wordsArray.length; i++) {
+        
+        for (let b = 0; b < allWords.length; b++) {
+            
+            if(userCopy.wordsArray[i] === allWords[b]) {
+                foundWords.push(allWords[b])
+
+            }
+        }
+        
+    }
+
+    // Get the number of occurrences from the array
+    for (let f = 0; f < foundWords.length; f++) {
+        
+
+        console.log(`"${foundWords[f]}" is displayed: ${searchTermCount[foundWords[f]]} times`) 
+    }
+
 
 };
 
@@ -231,6 +267,10 @@ function removeSpaces(data) {
 };
 
 function checkOccurrences(data) {
+    if(!localStorage.userContent) {
+        return;
+    };
+
     // Fetch copy string from local storage and convert it to a string
     parsedCopy = JSON.parse(localStorage.userContent)
 
@@ -241,7 +281,9 @@ function checkOccurrences(data) {
 
     // Create an array with only one instance of words, no duplicates 
     let uniqueWords = [...new Set(allWordsArray)];
+    allWords = uniqueWords;
     console.log(uniqueWords);
+    searchTermCount = duplicates
     console.log(duplicates);
 
     // Call function to display the words as a list item for testing
