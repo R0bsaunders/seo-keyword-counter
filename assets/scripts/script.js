@@ -60,9 +60,10 @@ checkMatches();
 
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function(event) {
-addUserCopy()
-checkOccurrences()
+addUserCopy();
 checkMatches();
+checkOccurrences();
+
 
 
 
@@ -73,7 +74,7 @@ addButton.addEventListener("click", function(event) {
 
     event.preventDefault();
     addSearchTerm();
-    checkMatches()
+    checkMatches();
 });
 
 // Render user specified keywords and anything already in local storage
@@ -87,9 +88,9 @@ function displaySearchTerms() {
     } else {
 
         // Check to see if the search term already exists so get local storage searchTerms key and convert the string into an array
+        document.getElementById("searchTermList").innerHTML="";
         let parsedSearches = JSON.parse(localStorage.searchTerms);
         userCopy.wordsArray = parsedSearches;
-        document.getElementById("searchTermList").innerHTML="";
 
         // Run a loop that checks for search term so that the entire argument can be broken if the search exists already
         for (let i = 0; i < parsedSearches.length; i++) {
@@ -170,16 +171,14 @@ clearStorageBtn.addEventListener("click", function(event) {
     event.preventDefault();
     removeData()
 
-
-
 });
 
 // Removes the entire search history key from local storage and clears the local searched terms array variable
 function removeData() {
 
     localStorage.clear();
-    userCopy.wordsArray = []
-    userCopy.content = ""
+    userCopy.wordsArray = [];
+    userCopy.content = "";
     document.getElementById("occurrencesList").innerHTML = "";
     displaySearchTerms();
     displayUserContent();
@@ -280,9 +279,8 @@ function checkOccurrences(data) {
     // Create an array with only one instance of words, no duplicates 
     let uniqueWords = [...new Set(allWordsArray)];
     allWords = uniqueWords;
-    console.log(uniqueWords);
     searchTermCount = duplicates;
-    console.log(duplicates);
+
 
     // Call function to display the words as a list item for testing
     displayAllWords(uniqueWords);
@@ -290,3 +288,19 @@ function checkOccurrences(data) {
 };
 
 
+const test = "The alarm went off at exactly 6:00 AM as it had every morning for the past five years. Barbara began her morning and was ready to eat breakfast by 7:00 AM. The day appeared to be as normal as any other, but that was about to change. In fact, it was going to change at exactly 7:23 AM.She reached her goal, exhausted. Even more chilling to her was that the euphoria that she thought she'd feel upon reaching it wasn't there. Something wasn't right. Was this the only feeling she'd have for over five years of hard work?";
+
+
+function findFullMatches() {
+
+    for (let i = 0; i < userCopy.wordsArray.length; i++) {
+console.log(userCopy.wordsArray[i]);
+        var regex = new RegExp(`\\b${userCopy.wordsArray[i]}\\b`, 'gi');
+console.log(regex);
+        const matches = test.match(regex);
+        console.log(matches?matches.length:0);
+
+    }
+
+}
+findFullMatches()
