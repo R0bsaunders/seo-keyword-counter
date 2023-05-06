@@ -46,26 +46,22 @@ const matchesCount = document.getElementById("matchesCount")
 
 
 let searchTerms = [];
-
-let userCopy = {
-    content: "",
-    wordsArray: []
-};
-let allWords = [];
+let userCopy = 
+    {
+        content: "",
+        wordsArray: []
+    };
 let searchTermCount = {};
+
 displaySearchTerms();
 displayUserContent();
 checkOccurrences();
-checkMatches();
+
 
 // Add event listener to copy box on any change
-userData.addEventListener("keyup", function(event) {
+userData.addEventListener("keyup", function() {
 addUserCopy();
-checkMatches();
 checkOccurrences();
-
-
-
 
 });
 
@@ -74,7 +70,7 @@ addButton.addEventListener("click", function(event) {
 
     event.preventDefault();
     addSearchTerm();
-    checkMatches();
+
 });
 
 // Render user specified keywords and anything already in local storage
@@ -93,14 +89,26 @@ function displaySearchTerms() {
         userCopy.wordsArray = parsedSearches;
 
         // Run a loop that checks for search term so that the entire argument can be broken if the search exists already
-        for (let i = 0; i < parsedSearches.length; i++) {
+
+        parsedSearches.forEach(element => {
 
             let listedTerm = document.createElement('li');
-            let textContent = document.createTextNode(`${parsedSearches[i]}`)
+            let textContent = document.createTextNode(element)
             listedTerm.appendChild(textContent);
             document.getElementById("searchTermList").appendChild(listedTerm);
 
-        };
+
+
+        })
+
+        // for (let i = 0; i < parsedSearches.length; i++) {
+
+        //     let listedTerm = document.createElement('li');
+        //     let textContent = document.createTextNode(`${parsedSearches[i]}`)
+        //     listedTerm.appendChild(textContent);
+        //     document.getElementById("searchTermList").appendChild(listedTerm);
+
+        // };
     };
 };
 
@@ -227,31 +235,6 @@ function addUserCopy() {
 };
 
 
-function checkMatches() {
-   
-    // Check to see if local storage is empty. if not, run check occurrences
-    if (localStorage.searchTerms) {
-        checkOccurrences()
-    };
-
-    // Clear existing HTML for overwriting
-    matchesCount.innerHTML="";
-
-    let foundWords=[];
-
-    // Check to see if any of the user's search terms are contained in the list of words array and create a new array with matches
-    for (let i = 0; i < userCopy.wordsArray.length; i++) {
-        
-        for (let b = 0; b < allWords.length; b++) {
-            
-            if(userCopy.wordsArray[i] === allWords[b]) {
-                foundWords.push(allWords[b])
-
-            };
-        };
-    };
-
-};
 
 function checkOccurrences() {
 
@@ -274,10 +257,9 @@ function checkOccurrences() {
 
         // Create list for each search term with the number of times it has been found
         let foundTerm = document.createElement('li');
-        let termContent = document.createTextNode(`The term '${userCopy.wordsArray[i]}' appears ${matches?matches.length:0} times`)
+        let termContent = document.createTextNode(`The term '${userCopy.wordsArray[i]}' appears ${matches?matches.length:0} times`);
         foundTerm.appendChild(termContent);
         document.getElementById("occurrencesList").appendChild(foundTerm);
 
     };
-
 };
