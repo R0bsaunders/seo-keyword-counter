@@ -226,9 +226,6 @@ function addUserCopy() {
 
 };
 
-function convertLowercase(data) {
-
-};
 
 function checkMatches() {
    
@@ -254,53 +251,33 @@ function checkMatches() {
         };
     };
 
-    // Get the number of occurrences from the array
-    for (let f = 0; f < foundWords.length; f++) {
-        
-        matchesCount.innerHTML=`"${foundWords[f]}" is displayed: ${searchTermCount[foundWords[f]]} times`;
-
-    };
 };
 
-function checkOccurrences(data) {
+function checkOccurrences() {
+
     // Check to see if local storage is empty. if not, run check occurrences
     if(!localStorage.userContent) {
         return;
     };
 
-    // Fetch copy string from local storage and convert it to a string
-    parsedCopy = JSON.parse(localStorage.userContent);
+    // Clear the terms already there to ensure only up to date occurrences are displayed
+    document.getElementById("occurrencesList").innerHTML = "";
 
-    // Create an array containing all the words
-    let allWordsArray = parsedCopy.match(/\b(\w+)\b/g);
-    const duplicates = {};
-    allWordsArray.forEach(function(x) { duplicates[x] = (duplicates[x] || 0) +1; });
+    // **THIS IS THE MAIN PROCESS THAT CHECKS THE USER SEARCH TERMS AGAINST THE USER CONTENT**
+    for (let i = 0; i < userCopy.wordsArray.length; i++) {
 
-    // Create an array with only one instance of words, no duplicates 
-    let uniqueWords = [...new Set(allWordsArray)];
-    allWords = uniqueWords;
-    searchTermCount = duplicates;
+        // This variable becomes the search term on each array iteration and is converted to RegExp. The \\b...\\b ensures only full word matches are returned positive. This means small words or single letter words like 'a', or' and 'the' will not be returned 
+        var regex = new RegExp(`\\b${userCopy.wordsArray[i]}\\b`, 'gi');
 
+        // This variable becomes an array containing every instance that the search term is found. We then display the array length for the number of times it is found
+        const matches = userCopy.content.match(regex);
 
-    // Call function to display the words as a list item for testing
-    displayAllWords(uniqueWords);
+        // Create list for each search term with the number of times it has been found
+        let foundTerm = document.createElement('li');
+        let termContent = document.createTextNode(`The term '${userCopy.wordsArray[i]}' appears ${matches?matches.length:0} times`)
+        foundTerm.appendChild(termContent);
+        document.getElementById("occurrencesList").appendChild(foundTerm);
+
+    };
 
 };
-
-
-const test = "The alarm went off at exactly 6:00 AM as it had every morning for the past five years. Barbara began her morning and was ready to eat breakfast by 7:00 AM. The day appeared to be as normal as any other, but that was about to change. In fact, it was going to change at exactly 7:23 AM.She reached her goal, exhausted. Even more chilling to her was that the euphoria that she thought she'd feel upon reaching it wasn't there. Something wasn't right. Was this the only feeling she'd have for over five years of hard work?";
-
-
-function findFullMatches() {
-
-    for (let i = 0; i < userCopy.wordsArray.length; i++) {
-console.log(userCopy.wordsArray[i]);
-        var regex = new RegExp(`\\b${userCopy.wordsArray[i]}\\b`, 'gi');
-console.log(regex);
-        const matches = test.match(regex);
-        console.log(matches?matches.length:0);
-
-    }
-
-}
-findFullMatches()
