@@ -48,7 +48,8 @@ let userCopy =
         content: "",
         wordsArray: []
     };
-let searchTermCount = {};
+
+let searchTermCount = [];
 
 displaySearchTerms();
 displayCopy();
@@ -66,6 +67,7 @@ addButton.addEventListener("click", function(event) {
 
     event.preventDefault();
     addSearchTerm();
+    checkOccurrences()
 });
 
 // Render user specified keywords and anything already in local storage
@@ -199,13 +201,17 @@ function checkOccurrences() {
     if(!localStorage.userContent) {
         return;
     };
+
+    // Clear searchTerm Variable so it's up to date with correct count
+    let searchTermCount = [];
+
     // Clear the terms already there to ensure only up to date occurrences are displayed
     document.getElementById("resultsList").innerHTML = "";
 
     // **THIS IS THE MAIN PROCESS THAT CHECKS THE USER SEARCH TERMS AGAINST THE USER CONTENT**
     
     userCopy.wordsArray.forEach(element => {
-
+        
         // This variable becomes the search term on each array iteration and is converted to RegExp. The \\b...\\b ensures only full word matches are returned positive. This means small words or single letter words like 'a', or' and 'the' will not be returned 
         var regex = new RegExp(`\\b${element}\\b`, 'gi');
 
@@ -214,6 +220,16 @@ function checkOccurrences() {
 
         // Display li item function
         displayTotalMatches(element, matches);
+
+        // Update global variable
+        var obj = {
+            keyword: `${element}`,
+            count: `${matches?matches.length:0}`
+        };
+
+        searchTermCount.push(obj);
+        console.log(searchTermCount);
+
     });        
 };
 
@@ -225,3 +241,5 @@ function displayTotalMatches(term, matchedTerm) {
     foundTerm.appendChild(termContent);
     document.getElementById("resultsList").appendChild(foundTerm);
 };
+
+console.log(searchTermCount);
