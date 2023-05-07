@@ -33,7 +33,6 @@
     // User can specify desired number of occurrences with color coding to indicate under or over use
     // User can enter paragraphs and DOM will render Paragraph breaks 
 
-
 // Variables
 const searchTerm = true; // This will determine what localStorage is modified
 const searchTermEntry = document.querySelector("#searchTermEntry");
@@ -41,10 +40,8 @@ const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
 const userData = document.querySelector("#userData")
-const occurrencesList = document.querySelector("#occurrencesList")
+const resultsList = document.querySelector("#resultsList")
 const matchesCount = document.getElementById("matchesCount")
-
-
 let searchTerms = [];
 let userCopy = 
     {
@@ -54,14 +51,13 @@ let userCopy =
 let searchTermCount = {};
 
 displaySearchTerms();
-displayUserContent();
+displayCopy();
 checkOccurrences();
-
 
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function() {
-addUserCopy();
-checkOccurrences();
+    addUserCopy();
+    checkOccurrences();
 
 });
 
@@ -70,79 +66,48 @@ addButton.addEventListener("click", function(event) {
 
     event.preventDefault();
     addSearchTerm();
-
 });
 
 // Render user specified keywords and anything already in local storage
 function displaySearchTerms() {
 
-    // Check to see if there is any history yet
+    // Check to see if there is any local storage for searchTerms.  If not, prompt user to add search terms
     if(!localStorage.searchTerms){
 
         document.getElementById("searchTermList").innerHTML="Add some search terms";
 
     } else {
 
-        // Check to see if the search term already exists so get local storage searchTerms key and convert the string into an array
+        // Clear the html list and Convert the string into an array as well as updating global wordsArray Variable with previous searches
         document.getElementById("searchTermList").innerHTML="";
         let parsedSearches = JSON.parse(localStorage.searchTerms);
         userCopy.wordsArray = parsedSearches;
 
-        // Run a loop that checks for search term so that the entire argument can be broken if the search exists already
-
+        // Loop that checks for search term so that the entire argument can be broken if the search exists already
         parsedSearches.forEach(element => {
 
             let listedTerm = document.createElement('li');
-            let textContent = document.createTextNode(element)
+            let textContent = document.createTextNode(element);
             listedTerm.appendChild(textContent);
             document.getElementById("searchTermList").appendChild(listedTerm);
-
-
-
-        })
-
-        // for (let i = 0; i < parsedSearches.length; i++) {
-
-        //     let listedTerm = document.createElement('li');
-        //     let textContent = document.createTextNode(`${parsedSearches[i]}`)
-        //     listedTerm.appendChild(textContent);
-        //     document.getElementById("searchTermList").appendChild(listedTerm);
-
-        // };
+        });
     };
 };
 
-function displayAllWords(data) {
-
-    document.getElementById("occurrencesList").innerHTML = "";
-
-    for (let i = 0; i < data.length; i++) {
-
-        let listedTerm = document.createElement('li');
-        let textContent = document.createTextNode(`${data[i]}`)
-        listedTerm.appendChild(textContent);
-        document.getElementById("occurrencesList").appendChild(listedTerm);
-
-    };
-}
-
 // Display user content if already in local storage
-function displayUserContent() {
+function displayCopy() {
 
     // Checks if there is already data stored
     if (!localStorage.userContent) {
-        userData.value = ""
+        userData.value = "";
         userData.placeholder="Enter your content here";
-
         return;
-
     };
 
-    // Place the stored data into the content box
-    let parsedContent = JSON.parse(localStorage.userContent)
+    // Place the local storage content data into the content box
+    let parsedContent = JSON.parse(localStorage.userContent);
     userData.value = parsedContent;
     userCopy.content = parsedContent;
-
 };
 
 // Test user's entry and either fail or trigger adding to storage
@@ -151,25 +116,24 @@ function addSearchTerm() {
     // Test if search box is empty
     if (!searchTermEntry.value) {
 
-        alert("Enter some text")
+        alert("Enter some text");
         return;
 
-    // Test if local storage contains previous searches
+    // Test if local storage contains previous searches **Removing this will throw an error when adding the first search term if there is no local storage present***
     } else if (!localStorage.searchTerms)  {
 
-        addData()
+        addSearchData();
 
     // Test if users search is already stored in local storage
     } else if(termPresent()) {
 
-        alert("You've already added this")
+        alert("You've already added this");
         return;
     
     // Trigger addData function
     } else {
 
-        addData();
-
+        addSearchData();
     };
 };
 
@@ -177,19 +141,18 @@ function addSearchTerm() {
 clearStorageBtn.addEventListener("click", function(event) {
 
     event.preventDefault();
-    removeData()
-
+    clearData();
+    displaySearchTerms();
+    displayCopy();
 });
 
 // Removes the entire search history key from local storage and clears the local searched terms array variable
-function removeData() {
+function clearData() {
 
     localStorage.clear();
     userCopy.wordsArray = [];
     userCopy.content = "";
-    document.getElementById("occurrencesList").innerHTML = "";
-    displaySearchTerms();
-    displayUserContent();
+    document.getElementById("resultsList").innerHTML = "";
 };
 
 // Check if a keyword has is already present in local storage
@@ -204,37 +167,31 @@ function termPresent() {
 
             clearSearch();
             return true;
-
         };
     };
 };
 
 // Adds the search term to the local storage
-function addData() {
+function addSearchData() {
     
     userCopy.wordsArray.push(searchTermEntry.value);
     localStorage.setItem("searchTerms", JSON.stringify(userCopy.wordsArray));
     clearSearch();
     displaySearchTerms();
-
 };
 
 // Clears the search box
 function clearSearch() {
 
     searchTermEntry.value="";
-
 };
 
 // Add user copy to local storage
 function addUserCopy() {
 
     localStorage.setItem("userContent", JSON.stringify(userData.value));
-
-
+    userCopy.content=userData.value;
 };
-
-
 
 function checkOccurrences() {
 
@@ -242,24 +199,29 @@ function checkOccurrences() {
     if(!localStorage.userContent) {
         return;
     };
-
     // Clear the terms already there to ensure only up to date occurrences are displayed
-    document.getElementById("occurrencesList").innerHTML = "";
+    document.getElementById("resultsList").innerHTML = "";
 
     // **THIS IS THE MAIN PROCESS THAT CHECKS THE USER SEARCH TERMS AGAINST THE USER CONTENT**
-    for (let i = 0; i < userCopy.wordsArray.length; i++) {
+    
+    userCopy.wordsArray.forEach(element => {
 
         // This variable becomes the search term on each array iteration and is converted to RegExp. The \\b...\\b ensures only full word matches are returned positive. This means small words or single letter words like 'a', or' and 'the' will not be returned 
-        var regex = new RegExp(`\\b${userCopy.wordsArray[i]}\\b`, 'gi');
+        var regex = new RegExp(`\\b${element}\\b`, 'gi');
 
         // This variable becomes an array containing every instance that the search term is found. We then display the array length for the number of times it is found
         const matches = userCopy.content.match(regex);
 
-        // Create list for each search term with the number of times it has been found
-        let foundTerm = document.createElement('li');
-        let termContent = document.createTextNode(`The term '${userCopy.wordsArray[i]}' appears ${matches?matches.length:0} times`);
-        foundTerm.appendChild(termContent);
-        document.getElementById("occurrencesList").appendChild(foundTerm);
+        // Display li item function
+        displayTotalMatches(element, matches);
+    });        
+};
 
-    };
+function displayTotalMatches(term, matchedTerm) {
+
+    // Create list for each search term with the number of times it has been found
+    let foundTerm = document.createElement('li');
+    let termContent = document.createTextNode(`The term '${term}' appears ${matchedTerm?matchedTerm.length:0} times`);
+    foundTerm.appendChild(termContent);
+    document.getElementById("resultsList").appendChild(foundTerm);
 };
