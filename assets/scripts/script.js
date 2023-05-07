@@ -34,7 +34,7 @@
     // User can enter paragraphs and DOM will render Paragraph breaks 
 
 // Variables
-const searchTerm = true; // This will determine what localStorage is modified
+
 const searchTermEntry = document.querySelector("#searchTermEntry");
 const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
@@ -57,9 +57,9 @@ checkOccurrences();
 
 // Add event listener to copy box on any change
 userData.addEventListener("keyup", function() {
+
     addUserCopy();
     checkOccurrences();
-
 });
 
 // Event listener onto the add search term button
@@ -74,7 +74,7 @@ addButton.addEventListener("click", function(event) {
 function displaySearchTerms() {
 
     // Check to see if there is any local storage for searchTerms.  If not, prompt user to add search terms
-    if(!localStorage.searchTerms){
+    if(checkLocalStorage("terms")){
 
         document.getElementById("searchTermList").innerHTML="Add some search terms";
 
@@ -100,7 +100,7 @@ function displaySearchTerms() {
 function displayCopy() {
 
     // Checks if there is already data stored
-    if (!localStorage.userContent) {
+    if (checkLocalStorage("content")) {
         userData.value = "";
         userData.placeholder="Enter your content here";
         return;
@@ -122,7 +122,7 @@ function addSearchTerm() {
         return;
 
     // Test if local storage contains previous searches **Removing this will throw an error when adding the first search term if there is no local storage present***
-    } else if (!localStorage.searchTerms)  {
+    } else if (checkLocalStorage("terms"))  {
 
         addSearchData();
 
@@ -186,6 +186,23 @@ function addSearchData() {
 function clearSearch() {
 
     searchTermEntry.value="";
+};
+
+// Function to test if local storage is empty returning false if it is
+function checkLocalStorage(data) {
+
+    if(data == "terms" && !localStorage.searchTerms) {
+
+        return true;
+
+    } else if(data == "content" && !localStorage.userContent) {
+
+        return true;
+
+    } else {
+
+        return false;
+    };
 };
 
 // Add user copy to local storage
