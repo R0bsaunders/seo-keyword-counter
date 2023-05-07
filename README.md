@@ -1,5 +1,3 @@
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Rob's Keyword Counter for SEO
 
 ## Table of Contents
@@ -41,7 +39,3 @@ You can get in touch by using the following:
 
 ### Email
 **[me@rob-saunders.co.uk](me@rob-saunders.co.uk)**
-
-## License
-This code is distributed under the MIT License.
-If for any reason this code is useful to anyone, please feel free to use it citing me as the author and linking to my website rob-saunders.co.uk and my GitHub. You may not use the code to make money be it directly or via ads / subscriptions
