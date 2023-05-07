@@ -76,7 +76,7 @@ function displaySearchTerms() {
     // Check to see if there is any local storage for searchTerms.  If not, prompt user to add search terms
     if(checkLocalStorage("terms")){
 
-        document.getElementById("searchTermList").innerHTML="Add some search terms";
+        document.getElementById("searchTermList").innerHTML="Your keywords will show here";
 
     } else {
 
@@ -88,6 +88,9 @@ function displaySearchTerms() {
         // Loop that checks for search term so that the entire argument can be broken if the search exists already
         parsedSearches.forEach(element => {
 
+
+
+            
             let listedTerm = document.createElement('li');
             let textContent = document.createTextNode(element);
             listedTerm.appendChild(textContent);
