@@ -1,0 +1,21 @@
+:root {
+    --brandColor: rgba(69, 9, 116,1);
+    --brandColorOpaque: rgba(69, 9, 116,.5);
+}
+
+h1 {
+    color: var(--brandColor) !important
+}
+
+/* Buttons */
+.btn-primary{
+    background-color: var(--brandColor) !important;
+    border: none !important;
+}
+.btn-primary:hover{
+    background-color: var(--brandColorOpaque) !important;
+}
+
+#logo {
+    width: 35%;
+}
