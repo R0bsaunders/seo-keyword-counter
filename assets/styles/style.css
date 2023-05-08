@@ -28,7 +28,3 @@ footer {
 .btn-primary:hover{
     background-color: var(--brandColorOpaque) !important;
 }
-
-#logo {
-    width: 35%;
-}
