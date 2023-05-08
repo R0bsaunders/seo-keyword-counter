@@ -7,6 +7,19 @@ h1 {
     color: var(--brandColor) !important
 }
 
+header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+footer {
+    height:250px;
+}
+#keywordEntry {
+    position: fixed;   
+    left: 0;
+    bottom: 0;
+}
 /* Buttons */
 .btn-primary{
     background-color: var(--brandColor) !important;

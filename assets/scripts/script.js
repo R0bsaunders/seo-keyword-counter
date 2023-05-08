@@ -41,7 +41,6 @@ const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
 const userData = document.querySelector("#userData")
 const resultsList = document.querySelector("#resultsList")
-const matchesCount = document.getElementById("matchesCount")
 let searchTerms = [];
 let userCopy = 
     {
@@ -88,13 +87,31 @@ function displaySearchTerms() {
         // Loop that checks for search term so that the entire argument can be broken if the search exists already
         parsedSearches.forEach(element => {
 
+            let keyword = document.createTextNode(element);
+            let occurrences = document.createTextNode("# Occurrences");
+            let divWrapper = document.createElement('div');
+            let  divContainer = document.createElement('div');
+            let div = document.createElement('div');
+            let h6 = document.createElement('h6');
+            let p = document.createElement('p');
+
+            divWrapper.setAttribute("class", "list-group-item list-group-item-action d-flex gap-3 py-3");
+            divWrapper.setAttribute("aria-current", "true");
+
+            divContainer.setAttribute("class","d-flex gap-2 w-100 justify-content-between");
+
+            h6.appendChild(keyword);
+            p.appendChild(occurrences);
 
 
-            
-            let listedTerm = document.createElement('li');
-            let textContent = document.createTextNode(element);
-            listedTerm.appendChild(textContent);
-            document.getElementById("searchTermList").appendChild(listedTerm);
+            divWrapper.appendChild(divContainer);
+            divContainer.appendChild(div)
+            div.appendChild(h6)
+            divContainer.appendChild(p)
+
+            console.log("it worked");
+            document.getElementById("searchTermList").appendChild(divWrapper);
+
         });
     };
 };
@@ -105,7 +122,7 @@ function displayCopy() {
     // Checks if there is already data stored
     if (checkLocalStorage("content")) {
         userData.value = "";
-        userData.placeholder="Enter your content here";
+        userData.placeholder="Enter your wonderful copy here";
         return;
     };
 
