@@ -40,7 +40,6 @@ const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
 const userData = document.querySelector("#userData")
-const resultsList = document.querySelector("#resultsList")
 let searchTerms = [];
 let userCopy = 
     {
@@ -190,7 +189,6 @@ function clearData() {
     localStorage.clear();
     userCopy.wordsArray = [];
     userCopy.content = "";
-    document.getElementById("resultsList").innerHTML = "";
 };
 
 // Check if a keyword has is already present in local storage
@@ -258,8 +256,6 @@ function checkOccurrences() {
     // Clear searchTerm Variable so it's up to date with correct count
     searchTermCount = [];
 
-    // Clear the terms already there to ensure only up to date occurrences are displayed
-    document.getElementById("resultsList").innerHTML = "";
 
     // **THIS IS THE MAIN PROCESS THAT CHECKS THE USER SEARCH TERMS AGAINST THE USER CONTENT**
     
