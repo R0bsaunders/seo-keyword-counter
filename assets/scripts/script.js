@@ -49,6 +49,8 @@ let userCopy =
     };
 
 let searchTermCount = [];
+const styleNotFound = "background-color: rgba(0, 128, 0, 0.413) !important;transition-duration: 1s;";
+const styleFound = "background-color: rgba(255, 0, 0, 0.413) !important;transition-duration: 1s;";
 
 displaySearchTerms();
 displayCopy();
@@ -98,12 +100,13 @@ function displaySearchTerms() {
 
             divWrapper.setAttribute("class", "list-group-item list-group-item-action d-flex gap-3 py-3");
             divWrapper.setAttribute("aria-current", "true");
+            divWrapper.setAttribute("id", `${element}Style`);
 
             divContainer.setAttribute("class","d-flex gap-2 w-100 justify-content-between");
             h6.appendChild(keyword);
             h6.setAttribute("id", element);
             p.appendChild(remove);
-            p.setAttribute("class", "remove")
+            p.setAttribute("class", "remove");
 
             // Add an event lister to the remove button
             p.addEventListener('click', () => {
@@ -112,15 +115,15 @@ function displaySearchTerms() {
                 localStorage.setItem("searchTerms", JSON.stringify(parsedSearches.filter(a => a !== element))); // It is the filter method here that takes out the search term from the array.
 
                 //Reload the search terms 
-                displaySearchTerms()
+                displaySearchTerms();
                 // Reload the testing occurrences
-                checkOccurrences()
+                checkOccurrences();
             });
 
             divWrapper.appendChild(divContainer);
-            divContainer.appendChild(div)
-            div.appendChild(h6)
-            divContainer.appendChild(p)
+            divContainer.appendChild(div);
+            div.appendChild(h6);
+            divContainer.appendChild(p);
             document.getElementById("searchTermList").appendChild(divWrapper);
 
         });
@@ -275,8 +278,15 @@ function checkOccurrences() {
         searchTermCount.push(obj);
 
         if(document.getElementById(element)) {
-            document.getElementById(element).innerHTML = `"${element}" is displayed ${matches?matches.length:0} times`
-        }
+            document.getElementById(element).innerHTML = `"${element.toUpperCase()}" is displayed ${obj.count} times`;
+            
+            if(obj.count>0) {
+            document.getElementById(`${element}Style`).setAttribute("style", `${styleNotFound}`) 
+
+            } else {
+                document.getElementById(`${element}Style`).setAttribute("style", `${styleFound}`) 
+            }
+        };
 
     });        
 };
