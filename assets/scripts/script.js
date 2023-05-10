@@ -88,8 +88,8 @@ function displaySearchTerms() {
 
         parsedSearches.forEach(element => {
 
-            let keyword = document.createTextNode(element);
-            let occurrences = document.createTextNode("Remove");
+            let keyword = document.createTextNode(`"${element.toUpperCase()}"`);
+            let remove = document.createTextNode("X");
             let divWrapper = document.createElement('div');
             let  divContainer = document.createElement('div');
             let div = document.createElement('div');
@@ -100,10 +100,9 @@ function displaySearchTerms() {
             divWrapper.setAttribute("aria-current", "true");
 
             divContainer.setAttribute("class","d-flex gap-2 w-100 justify-content-between");
-
             h6.appendChild(keyword);
-            p.appendChild(occurrences);
-
+            p.appendChild(remove);
+            p.setAttribute("class", "remove")
             // Add an event lister to the remove button
             p.addEventListener('click', () => {
 

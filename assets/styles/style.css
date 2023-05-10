@@ -35,3 +35,11 @@ footer {
 .btn-primary:hover{
     background-color: var(--brandColorOpaque) !important;
 }
+
+.remove {
+    color: red;
+}
+.remove:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
