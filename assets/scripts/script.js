@@ -85,10 +85,11 @@ function displaySearchTerms() {
         userCopy.wordsArray = parsedSearches;
 
         // Loop that checks for search term so that the entire argument can be broken if the search exists already
+
         parsedSearches.forEach(element => {
 
             let keyword = document.createTextNode(element);
-            let occurrences = document.createTextNode("# Occurrences");
+            let occurrences = document.createTextNode("Remove");
             let divWrapper = document.createElement('div');
             let  divContainer = document.createElement('div');
             let div = document.createElement('div');
@@ -103,13 +104,22 @@ function displaySearchTerms() {
             h6.appendChild(keyword);
             p.appendChild(occurrences);
 
+            // Add an event lister to the remove button
+            p.addEventListener('click', () => {
+
+                // Remove the item from the array
+                localStorage.setItem("searchTerms", JSON.stringify(parsedSearches.filter(a => a !== element))); // It is the filter method here that takes out the search term from the array.
+
+                //Reload the search terms 
+                displaySearchTerms()
+                // Reload the testing occurrences
+                checkOccurrences()
+            });
 
             divWrapper.appendChild(divContainer);
             divContainer.appendChild(div)
             div.appendChild(h6)
             divContainer.appendChild(p)
-
-            console.log("it worked");
             document.getElementById("searchTermList").appendChild(divWrapper);
 
         });
@@ -265,7 +275,7 @@ function checkOccurrences() {
         };
 
         searchTermCount.push(obj);
-        console.log(searchTermCount);
+
 
     });        
 };
@@ -278,5 +288,3 @@ function displayTotalMatches(term, matchedTerm) {
     foundTerm.appendChild(termContent);
     document.getElementById("resultsList").appendChild(foundTerm);
 };
-
-console.log(searchTermCount);

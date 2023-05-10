@@ -13,11 +13,18 @@ header {
 }
 
 footer {
+    display: flex;
+    background-color: aqua;
+    justify-content: center;
     height:250px;
 }
+
+#keywordForm {
+    background-color: rgba(0, 0, 255, 0.672) !important;
+}
+
 #keywordEntry {
     position: fixed;   
-    left: 0;
     bottom: 0;
 }
 /* Buttons */
