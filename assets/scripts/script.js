@@ -49,8 +49,8 @@ let userCopy =
     };
 
 let searchTermCount = [];
-const styleNotFound = "background-color: rgba(0, 128, 0, 0.413) !important;transition-duration: 1s;";
-const styleFound = "background-color: rgba(255, 0, 0, 0.413) !important;transition-duration: 1s;";
+const styleFound = "background-color: rgba(0, 128, 0, 0.25) !important;transition-duration: 1s;";
+const styleNotFound = "background-color: rgba(255, 0, 0, 0.25) !important;transition-duration: 1s;";
 
 displaySearchTerms();
 displayCopy();
@@ -69,6 +69,7 @@ addButton.addEventListener("click", function(event) {
     event.preventDefault();
     addSearchTerm();
     checkOccurrences()
+
 });
 
 // Render user specified keywords and anything already in local storage
@@ -90,7 +91,7 @@ function displaySearchTerms() {
 
         parsedSearches.forEach(element => {
 
-            let keyword = document.createTextNode(`"${element.toUpperCase()}"`);
+            let keyword = document.createTextNode(`"${element.toUpperCase()}" is used: ${isPlural(0)}`);
             let remove = document.createTextNode("X");
             let divWrapper = document.createElement('div');
             let  divContainer = document.createElement('div');
@@ -98,7 +99,8 @@ function displaySearchTerms() {
             let h6 = document.createElement('h6');
             let p = document.createElement('p');
 
-            divWrapper.setAttribute("class", "list-group-item list-group-item-action d-flex gap-3 py-3");
+            divWrapper.setAttribute("class", "searchTerm list-group-item list-group-item-action d-flex gap-3 py-3");
+            divWrapper.setAttribute("style", styleNotFound);
             divWrapper.setAttribute("aria-current", "true");
             divWrapper.setAttribute("id", `${element}Style`);
 
@@ -274,19 +276,34 @@ function checkOccurrences() {
             keyword: `${element}`,
             count: `${matches?matches.length:0}`
         };
-
         searchTermCount.push(obj);
 
+
         if(document.getElementById(element)) {
-            document.getElementById(element).innerHTML = `"${element.toUpperCase()}" is displayed ${obj.count} times`;
             
-            if(obj.count>0) {
-            document.getElementById(`${element}Style`).setAttribute("style", `${styleNotFound}`) 
+            document.getElementById(element).innerHTML = `"${element.toUpperCase()}" is used: ${isPlural(obj.count)}`;
+            
+            if(obj.count > 0) {
+
+            document.getElementById(`${element}Style`).setAttribute("style", `${styleFound}`);
 
             } else {
-                document.getElementById(`${element}Style`).setAttribute("style", `${styleFound}`) 
-            }
+
+                document.getElementById(`${element}Style`).setAttribute("style", `${styleNotFound}`);
+
+            };
         };
+
+
 
     });        
 };
+
+function isPlural(data) {
+    if(data == 0 || data > 1) {
+        return `${data} times`
+
+    } else {
+        return `${data} time`
+    }
+}
