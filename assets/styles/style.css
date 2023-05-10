@@ -3,13 +3,15 @@
     --brandColorOpaque: rgba(69, 9, 116,.5);
 }
 
+
+
 h1 {
     color: var(--brandColor) !important
 }
 
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 footer {
@@ -23,10 +25,10 @@ footer {
     background-color: rgba(0, 0, 255, 0.672) !important;
 }
 
-#keywordEntry {
-    position: fixed;   
-    bottom: 0;
+#userContent {
+    vertical-align: top;
 }
+
 /* Buttons */
 .btn-primary{
     background-color: var(--brandColor) !important;

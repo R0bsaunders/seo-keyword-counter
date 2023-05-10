@@ -11,24 +11,41 @@
 </head>
 
 <body>
-    <!-- <header>
 
-        <img id="logo" src="assets/images/countmykeywords-logo.png" alt="count my keywords logo displaying the slogan 'how many did you use?'" />
-
-    </header> -->
-
-    <div class="container col-xl-12 col-xxl-12">
-
-        <div class="col-md-12 col-lg-7 text-center text-lg-start">
-            
+    <header>
+        <div class="container">
             <h1 class="display-4 fw-bold lh-1 mb-3 py-4">Check your Keyword Density</h1>
-            <p class="col-lg-10 fs-6">Add your copy to the box below and then add all your keywords one at a time. The keyword count will instantly appear every time you add a keyword. The count will update every single time you make a change to the copy too!</p>
+        </div>
+    </header>
 
+    <section class="container d-flex justify-content-between">
+
+        <div class="col-4 ">
+            <div id="keywordEntry" class="text-left text-lg-start">
+                <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
+    
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
+                    <label for="searchTermEntry">Enter Keyword</label>
+                </div>
+
+                <button id="addData" class="w-100 btn btn-lg btn-primary" type="submit">Add Keyword</button>
+                <hr class="my-4">
+                <button id="clearStorage" class="w-75 btn btn-warning">Clear all</button>
+    
+                </form>
+
+                <div id="searchTermList" class="list-group w-auto">
+        
+                    <!-- The keywords added by the user will appear here -->
+        
+                </div>
+            </div>
         </div>
 
-        <div class="row align-items-center g-lg-5 py-2">
+        <div class="row align-self-start col-8">
 
-            <div class="col-md-12 col-lg-7 text-center text-lg-start">
+            <div class="text-center text-lg-start">
     
                 <label for="userCopy"></label>
 
@@ -36,48 +53,20 @@
 
     
             </div>
-            <div id="searchTermList" class="list-group w-auto">
-
-                <!-- The keywords added by the user will appear here -->
-    
-            </div>
+            <p class="fs-6">Add your copy to the box below and then add all your keywords one at a time. The keyword count will instantly appear every time you add a keyword. The count will update every single time you make a change to the copy too!</p>
         </div>
 
 
-    </div>
+    
+        </div>
 
-    <section>
-
-        <ul id="resultsList">
-            <!-- For testing, keyword counts are here -->
-        </ul>
 
     </section>
 
-
-
-    <section id="userContent">
-
-        <p>Enter one at a time, in the search box below. Press 'Add Key Word' to enter a keyword. All the key words you add will be saved in your browser, just in case you navigate away from the website. Click Clear all to remove all saved data and clear the slate</p>
-    </section>
 
     <footer>
 
-        <div id="keywordEntry" class="col-5 mx-auto">
-            <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
 
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
-                <label for="searchTermEntry">Enter Keyword</label>
-
-
-              </div>
-              <button id="addData" class="w-100 btn btn-lg btn-primary" type="submit">Add Keyword</button>
-              <hr class="my-4">
-              <button id="clearStorage" class="w-75 btn btn-warning">Clear all</button>
-
-            </form>
-        </div>
 
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
