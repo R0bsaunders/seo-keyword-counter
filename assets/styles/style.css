@@ -45,3 +45,8 @@ footer {
     text-decoration: underline;
     cursor: pointer;
 }
+
+#userData {
+    justify-self: end;
+    width: 99%
+}

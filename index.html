@@ -20,44 +20,32 @@
         
     </header>
 
-    <section class="container d-flex justify-content-between">
+    <section class="container d-flex flex-column">
+        <div class="row">
 
-        <div class="col-4 ">
-            <div id="keywordEntry" class="text-left text-lg-start">
-                <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
-    
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
-                    <label for="searchTermEntry">Enter Keyword</label>
-                </div>
-
-                <button id="addData" class="w-100 btn btn-lg btn-primary" type="submit">Add Keyword</button>
-                <hr class="my-4">
-                <button id="clearStorage" class="w-75 btn btn-warning">Clear all</button>
-    
-                </form>
-
-                <div id="searchTermList" class="list-group w-auto">
-        
-                    <!-- The keywords added by the user will appear here -->
-        
+            <div class="col-md-3 col-xs-12">
+                <div id="keywordEntry" class="text-left text-lg-start">
+                    <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
+                            <label for="searchTermEntry">Enter Keyword</label>
+                        </div>
+                        <button id="addData" class="w-100 btn btn-lg btn-primary" type="submit">Add Keyword</button>
+                        <hr class="my-4">
+                        <button id="clearStorage" class="w-75 btn btn-warning">Clear all</button>
+                    </form>
+                    <div id="searchTermList" class="list-group w-auto">
+                        <!-- The keywords added by the user will appear here -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row align-self-start col-8">
-    
-            <label for="userCopy"></label>
-
-            <textarea class="form-control" type="text" rows="10" id="userData"></textarea>
+            <div class="col-md-9 col-xs-12">
+                <label for="userCopy"></label>
+                <textarea class="form-control-md" type="text" rows="10" id="userData"></textarea>
+            </div>
 
         </div>
-
-
-    
-        </div>
-
-
     </section>
 
 
