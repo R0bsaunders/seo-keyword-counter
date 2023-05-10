@@ -101,8 +101,10 @@ function displaySearchTerms() {
 
             divContainer.setAttribute("class","d-flex gap-2 w-100 justify-content-between");
             h6.appendChild(keyword);
+            h6.setAttribute("id", element);
             p.appendChild(remove);
             p.setAttribute("class", "remove")
+
             // Add an event lister to the remove button
             p.addEventListener('click', () => {
 
@@ -249,7 +251,7 @@ function checkOccurrences() {
     };
 
     // Clear searchTerm Variable so it's up to date with correct count
-    let searchTermCount = [];
+    searchTermCount = [];
 
     // Clear the terms already there to ensure only up to date occurrences are displayed
     document.getElementById("resultsList").innerHTML = "";
@@ -264,9 +266,6 @@ function checkOccurrences() {
         // This variable becomes an array containing every instance that the search term is found. We then display the array length for the number of times it is found
         const matches = userCopy.content.match(regex);
 
-        // Display li item function
-        displayTotalMatches(element, matches);
-
         // Update global variable
         var obj = {
             keyword: `${element}`,
@@ -275,15 +274,9 @@ function checkOccurrences() {
 
         searchTermCount.push(obj);
 
+        if(document.getElementById(element)) {
+            document.getElementById(element).innerHTML = `"${element}" is displayed ${matches?matches.length:0} times`
+        }
 
     });        
-};
-
-function displayTotalMatches(term, matchedTerm) {
-
-    // Create list for each search term with the number of times it has been found
-    let foundTerm = document.createElement('li');
-    let termContent = document.createTextNode(`The term '${term}' appears ${matchedTerm?matchedTerm.length:0} times`);
-    foundTerm.appendChild(termContent);
-    document.getElementById("resultsList").appendChild(foundTerm);
 };
