@@ -16,12 +16,13 @@ header {
 footer {
 
     justify-content: center;
-    height:100px;
+padding: 1em 1em;
     width: 100%;
     background-color: var(--brandColor);
     color: white;
     text-align: center;
     margin-top: 5vh;
+    margin-bottom: -5vh;
 
 }
 

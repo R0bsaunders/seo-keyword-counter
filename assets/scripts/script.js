@@ -302,3 +302,6 @@ function isPlural(data) {
         return `${data} time`
     }
 }
+
+const d = new Date()
+document.getElementById("copyright").innerHTML = `Copyright Rob Saunders ${d.getFullYear()}`
