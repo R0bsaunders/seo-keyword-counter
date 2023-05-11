@@ -304,4 +304,4 @@ function isPlural(data) {
 }
 
 const d = new Date()
-document.getElementById("copyright").innerHTML = `Copyright Rob Saunders ${d.getFullYear()}`
+document.getElementById("copyright").innerHTML = `Copyright ${d.getFullYear()} Rob Saunders UK, All rights reserved `
