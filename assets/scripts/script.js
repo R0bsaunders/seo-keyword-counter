@@ -1,5 +1,3 @@
-// Variables
-
 const searchTermEntry = document.querySelector("#searchTermEntry");
 const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
@@ -16,81 +14,84 @@ let userCopy =
 let searchTermCount = [];
 const styleFound = "background-color: rgba(0, 255, 0, 0.25) !important;transition-duration: 1s;";
 const styleNotFound = "background-color: rgba(255, 0, 0, 0.25) !important;transition-duration: 1s;";
+const enterCopyPrompt = "Enter your wonderful copy here"
 
+// Event listeners
+// User Content to detect any key-presses
+userData.addEventListener("keyup", function() {
+    addUserCopy();
+    displayCopy();
+    checkOccurrences();
+
+});
+
+// Add keywords button to add user keywords to the array
+addButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    addSearchTerm();
+    checkOccurrences();
+
+});
+
+// Initial render to DOM
 displaySearchTerms();
 displayCopy();
 checkOccurrences();
 
-// Add event listener to copy box on any change
-userData.addEventListener("keyup", function() {
-
-    addUserCopy();
-    checkOccurrences();
-});
-
-// Event listener onto the add search term button
-addButton.addEventListener("click", function(event) {
-
-    event.preventDefault();
-    addSearchTerm();
-    checkOccurrences()
-
-});
-
 // Render user specified keywords and anything already in local storage
 function displaySearchTerms() {
 
-    // Check to see if there is any local storage for searchTerms.  If not, prompt user to add search terms
+    // Check to see if there is any local storage item for searchTerms. If not, show informative text
     if(checkLocalStorage("terms")){
-
         document.getElementById("searchTermList").innerHTML="Your keywords will show here";
 
     } else {
-
-        // Clear the html list and Convert the string into an array as well as updating global wordsArray Variable with previous searches
+        // Clear the html list to prevent stacking
         document.getElementById("searchTermList").innerHTML="";
+
+        // Convert the string into an array
         let parsedSearches = JSON.parse(localStorage.searchTerms);
+
+        // Update global wordsArray variable with previous searches
         userCopy.wordsArray = parsedSearches;
 
-        // Loop that checks for search term so that the entire argument can be broken if the search exists already
+        // Create and append to DOM a search term container for each user specified search term
+        parsedSearches.forEach(term => {
+            
+            // Declare required variables
+            var keyword = document.createTextNode(`"${term.toUpperCase()}" is used: ${isPlural(0)}`);
+            var removeIcon = document.createElement(`i`);
+            var keywordWrapper = document.createElement('div');
+            var keywordLi = document.createElement('li');
+            var keywordH6 = document.createElement('h6');
+            var keywordDelete = document.createElement('h6');
 
-        parsedSearches.forEach(element => {
-
-            let keyword = document.createTextNode(`"${element.toUpperCase()}" is used: ${isPlural(0)}`);
-            let remove = document.createElement(`i`);
-            let divWrapper = document.createElement('div');
-            let  divContainer = document.createElement('li');
-
-            let h6 = document.createElement('h6');
-            let p = document.createElement('h6');
-
-            divWrapper.setAttribute("class", "flex-fill");
-            divWrapper.setAttribute("style", styleNotFound);
-            divWrapper.setAttribute("id", `${element}Style`);
-
-            divContainer.setAttribute("class","searchTerm d-flex gap-2 justify-content-between align-items-center");
-            h6.appendChild(keyword);
-            h6.setAttribute("id", element);
-            remove.setAttribute("class", "bi bi-trash3")
-            p.appendChild(remove);
-            p.setAttribute("class", "remove");
+            // Add required attributes / classes
+            keywordWrapper.setAttribute("class", "flex-fill");
+            keywordWrapper.setAttribute("style", styleNotFound);
+            keywordWrapper.setAttribute("id", `${term}Style`);
+            keywordLi.setAttribute("class","searchTerm d-flex gap-2 justify-content-between align-items-center");
+            keywordH6.appendChild(keyword);
+            keywordH6.setAttribute("id", term);
+            removeIcon.setAttribute("class", "bi bi-trash3");
+            keywordDelete.appendChild(removeIcon);
+            keywordDelete.setAttribute("class", "remove");
 
             // Add an event lister to the remove button
-            p.addEventListener('click', () => {
-
+            keywordDelete.addEventListener('click', () => {
                 // Remove the item from the array
-                localStorage.setItem("searchTerms", JSON.stringify(parsedSearches.filter(a => a !== element))); // It is the filter method here that takes out the search term from the array.
-
+                localStorage.setItem("searchTerms", JSON.stringify(parsedSearches.filter(a => a !== term))); // It is the filter method here that takes out the search term from the array.
                 //Reload the search terms 
                 displaySearchTerms();
-                // Reload the testing occurrences
+                // Reload the occurrences
                 checkOccurrences();
             });
 
-            divWrapper.appendChild(divContainer);
-            divContainer.appendChild(h6);
-            divContainer.appendChild(p);
-            document.getElementById("searchTermList").appendChild(divWrapper);
+            // Add all generated HTML to the DOM
+            keywordWrapper.appendChild(keywordLi);
+            keywordLi.appendChild(keywordH6);
+            keywordLi.appendChild(keywordDelete);
+            document.getElementById("searchTermList").appendChild(keywordWrapper);
 
         });
     };
@@ -99,17 +100,28 @@ function displaySearchTerms() {
 // Display user content if already in local storage
 function displayCopy() {
 
-    // Checks if there is already data stored
+    // Checks if there is already data stored. If not, add placeholder text
     if (checkLocalStorage("content")) {
         userData.value = "";
-        userData.placeholder="Enter your wonderful copy here";
+        userData.placeholder= enterCopyPrompt;
         return;
+
+    } else {
+        // Check if user content box is empty based on local storage string being present, but empty
+        let parsedContent = JSON.parse(localStorage.userContent);
+
+        if(parsedContent === "") {
+            userData.placeholder= enterCopyPrompt;
+            return;
+
+        };
+
+        // Set the value to the content of the local storage and update the global array variable
+        userData.value = parsedContent;
+        userCopy.content = parsedContent;
+
     };
 
-    // Place the local storage content data into the content box
-    let parsedContent = JSON.parse(localStorage.userContent);
-    userData.value = parsedContent;
-    userCopy.content = parsedContent;
 };
 
 // Test user's entry and either fail or trigger adding to storage
