@@ -3,7 +3,7 @@
     --brandColorOpaque: rgba(69, 9, 116,.5);
 }
 
-h1 {
+h1, h2 {
     color: var(--brandColor) !important
 }
 
@@ -14,12 +14,15 @@ header {
 }
 
 footer {
-    display: flex;
-    background-color: rgba(32, 197, 131, 0.396);
+
     justify-content: center;
-    height:25px;
-    position: fixed;
-    bottom: 0;
+    height:100px;
+    width: 100%;
+    background-color: var(--brandColor);
+    color: white;
+    text-align: center;
+    margin-top: 5vh;
+
 }
 
 #keywordForm {
@@ -28,6 +31,7 @@ footer {
     border-radius: 10px !important;
     box-shadow:2px 2px grey;
     margin-bottom: 2vh;
+
 }
 
 /* Buttons */
@@ -42,7 +46,7 @@ footer {
 }
 
 .remove {
-    color: red;
+    color: var(--brandColor);
     font-size: large;
 
 
@@ -78,4 +82,8 @@ footer {
 
 #recycle {
     margin-left: 2vh;
+}
+
+#about {
+    margin-top: 5vh;
 }

@@ -105,7 +105,7 @@ function displaySearchTerms() {
             divContainer.setAttribute("class","searchTerm d-flex gap-2 justify-content-between align-items-center");
             h6.appendChild(keyword);
             h6.setAttribute("id", element);
-            remove.setAttribute("class", "bi bi-x-lg")
+            remove.setAttribute("class", "bi bi-trash3")
             p.appendChild(remove);
             p.setAttribute("class", "remove");
 
@@ -185,9 +185,9 @@ clearStorageBtn.addEventListener("click", function(event) {
 // Removes the entire search history key from local storage and clears the local searched terms array variable
 function clearData() {
 
-    localStorage.clear();
+    localStorage.removeItem("searchTerms");
     userCopy.wordsArray = [];
-    userCopy.content = "";
+
 };
 
 // Check if a keyword has is already present in local storage
