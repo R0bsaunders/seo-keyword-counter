@@ -91,21 +91,21 @@ function displaySearchTerms() {
         parsedSearches.forEach(element => {
 
             let keyword = document.createTextNode(`"${element.toUpperCase()}" is used: ${isPlural(0)}`);
-            let remove = document.createTextNode("X");
+            let remove = document.createElement(`i`);
             let divWrapper = document.createElement('div');
-            let  divContainer = document.createElement('div');
-            let div = document.createElement('div');
-            let h6 = document.createElement('h6');
-            let p = document.createElement('p');
+            let  divContainer = document.createElement('li');
 
-            divWrapper.setAttribute("class", "searchTerm list-group-item list-group-item-action d-flex gap-3 py-3");
+            let h6 = document.createElement('h6');
+            let p = document.createElement('h6');
+
+            divWrapper.setAttribute("class", "flex-fill");
             divWrapper.setAttribute("style", styleNotFound);
-            divWrapper.setAttribute("aria-current", "true");
             divWrapper.setAttribute("id", `${element}Style`);
 
-            divContainer.setAttribute("class","d-flex gap-2 w-100 justify-content-between");
+            divContainer.setAttribute("class","searchTerm d-flex gap-2 justify-content-between align-items-center");
             h6.appendChild(keyword);
             h6.setAttribute("id", element);
+            remove.setAttribute("class", "bi bi-x-lg")
             p.appendChild(remove);
             p.setAttribute("class", "remove");
 
@@ -122,8 +122,7 @@ function displaySearchTerms() {
             });
 
             divWrapper.appendChild(divContainer);
-            divContainer.appendChild(div);
-            div.appendChild(h6);
+            divContainer.appendChild(h6);
             divContainer.appendChild(p);
             document.getElementById("searchTermList").appendChild(divWrapper);
 

@@ -3,8 +3,6 @@
     --brandColorOpaque: rgba(69, 9, 116,.5);
 }
 
-
-
 h1 {
     color: var(--brandColor) !important
 }
@@ -12,21 +10,24 @@ h1 {
 header {
     display: flex;
     justify-content: flex-start;
+    margin-bottom: 5vh;
 }
 
 footer {
     display: flex;
-    background-color: aqua;
+    background-color: rgba(32, 197, 131, 0.396);
     justify-content: center;
-    height:250px;
+    height:25px;
+    position: fixed;
+    bottom: 0;
 }
 
 #keywordForm {
-    background-color: rgba(0, 0, 255, 0.672) !important;
-}
-
-#userContent {
-    vertical-align: top;
+    background-color: rgba(76, 4, 94, 0.222) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow:2px 2px grey;
+    margin-bottom: 2vh;
 }
 
 /* Buttons */
@@ -40,13 +41,34 @@ footer {
 
 .remove {
     color: red;
+    font-size: large;
+
+
 }
+
 .remove:hover {
     text-decoration: underline;
     cursor: pointer;
+
 }
 
 #userData {
     justify-self: end;
     width: 99%
+}
+
+.flex-fill {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    box-shadow:1px 1px grey;
+}
+
+#searchTermList {
+    margin-top: 2vh;
+}
+
+#userData {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    box-shadow:1px 1px grey;
 }
