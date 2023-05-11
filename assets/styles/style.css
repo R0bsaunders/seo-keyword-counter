@@ -71,4 +71,9 @@ footer {
     padding: 0.5rem 1rem;
     border-radius: 10px;
     box-shadow:1px 1px grey;
+    border-color: var(--brandColor) !important;
+}
+
+#recycle {
+    margin-left: 2vh;
 }

@@ -24,22 +24,22 @@
     <section class="container-xxl d-flex flex-column">
         <div class="row">
 
-            <div class="col-md-3 col-xs-12">
+            <div class="col-sm-4 col-xs-12">
                 <div id="keywordEntry" class="text-left text-lg-start">
                     <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
                             <label for="searchTermEntry">Enter Keyword</label>
                         </div>
-                        <button id="addData" class="w-100 btn btn-lg btn-primary" type="submit">Add Keyword</button>
+                        <button id="addData" class="w-100 btn btn-primary btn-md" type="submit">Add Keyword</button>
                         <hr class="my-4">
-                        <button id="clearStorage" class="w-75 btn btn-warning">Clear all<i class="bi bi-recycle"></i></button>
+                        <button id="clearStorage" class="btn btn-warning btn-sm">Clear all<i id="recycle" class="bi bi-recycle"></i></button>
                     </form>
 
                 </div>
             </div>
 
-            <div class="col-md-9 col-xs-12">
+            <div class="col-sm-8 col-xs-12">
                 <label for="userCopy"></label>
                 <textarea class="form-control-md" type="text" rows="10" id="userData"></textarea>
 
