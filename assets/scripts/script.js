@@ -33,6 +33,14 @@ addButton.addEventListener("click", function(event) {
 
 });
 
+// Event listener onto the clear all searches button
+clearStorageBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    removeAllKeywords();
+    displaySearchTerms();
+
+});
+
 // Initial render to DOM
 displaySearchTerms();
 displayCopy();
@@ -121,48 +129,35 @@ function displayCopy() {
         userCopy.content = parsedContent;
 
     };
-
 };
 
-// Test user's entry and either fail or trigger adding to storage
+// Test user's entry and either fail with alerts or add to storage and search term list
 function addSearchTerm() {
 
     // Test if search box is empty
     if (!searchTermEntry.value) {
-
-        alert("Enter some text");
+        alert("Enter a search term or keyword");
         return;
 
-    // Test if local storage contains previous searches **Removing this will throw an error when adding the first search term if there is no local storage present***
+    // Test if local storage exists and  **Removing this will throw an error when adding the first search term if there is no local storage present***
     } else if (checkLocalStorage("terms"))  {
-
-        addSearchData();
+        addTermLocalStorage();
 
     // Test if users search is already stored in local storage
     } else if(termPresent()) {
-
-        alert("You've already added this");
+        alert(`You've already added: "${searchTermEntry.value}"`);
+        clearSearch();
         return;
     
-    // Trigger addData function
+    // Other wise add term to local storage
     } else {
+        addTermLocalStorage();
 
-        addSearchData();
     };
 };
 
-// Event listener onto the clear all searches button
-clearStorageBtn.addEventListener("click", function(event) {
-
-    event.preventDefault();
-    clearData();
-    displaySearchTerms();
-    displayCopy();
-});
-
 // Removes the entire search history key from local storage and clears the local searched terms array variable
-function clearData() {
-
+function removeAllKeywords() {
     localStorage.removeItem("searchTerms");
     userCopy.wordsArray = [];
 
@@ -172,20 +167,18 @@ function clearData() {
 function termPresent() {
 
     // Check if any data already in local storage
-    parsedSearchTerm = JSON.parse(localStorage.searchTerms);
+    wordPresentTest = JSON.parse(localStorage.searchTerms);
 
-    for (let j = 0; j < parsedSearchTerm.length; j++) {
-
-        if (parsedSearchTerm[j] === searchTermEntry.value) {
-
-            clearSearch();
+    for (let j = 0; j < wordPresentTest.length; j++) {
+        if (wordPresentTest[j] === searchTermEntry.value) {
             return true;
+
         };
     };
 };
 
 // Adds the search term to the local storage
-function addSearchData() {
+function addTermLocalStorage() {
     
     userCopy.wordsArray.push(searchTermEntry.value);
     localStorage.setItem("searchTerms", JSON.stringify(userCopy.wordsArray));
@@ -195,8 +188,8 @@ function addSearchData() {
 
 // Clears the search box
 function clearSearch() {
-
     searchTermEntry.value="";
+
 };
 
 // Function to test if local storage is empty returning false if it is
