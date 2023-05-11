@@ -1,100 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/styles/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    
-    <title>Free Keyword Density Counter for SEO</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/styles/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <title>Free Keyword Density Counter for SEO</title>
+    </head>
 
-<body>
+    <body>
+        <header>
+            <div class="container">
+                <h1 class="display-4 fw-bold lh-1 mb-3 py-4">Check your Keyword Density</h1>
+                <p class="fs-6">Add your copy to the box below and then add all your keywords one at a time. The keyword count will instantly appear every time you add a keyword. The count will update every single time you make a change to the copy too!</p>
+            </div>
+        </header>
 
-    <header>
-        <div class="container">
-            <h1 class="display-4 fw-bold lh-1 mb-3 py-4">Check your Keyword Density</h1>
-            <p class="fs-6">Add your copy to the box below and then add all your keywords one at a time. The keyword count will instantly appear every time you add a keyword. The count will update every single time you make a change to the copy too!</p>
-        </div>
-        
-    </header>
+        <section id="userInput" class="container d-flex flex-column">
+            <div class="row">
+                
+                <div class="col-sm-4 col-xs-12">
+                    <div id="keywordEntry" class="text-left text-lg-start">
+                        <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
+                                <label for="searchTermEntry">Enter Keyword</label>
+                            </div>
+                            <button id="addData" class="w-100 btn btn-primary btn-md" type="submit">Add Keyword</button>
+                            <hr class="my-4">
+                            <button id="clearStorage" class="btn btn-warning btn-sm">Clear all<i id="recycle" class="bi bi-recycle"></i></button>
+                        </form>
 
-    <section id="userInput" class="container d-flex flex-column">
+                    </div>
+                </div>
 
-        <div class="row">
-            
-            <div class="col-sm-4 col-xs-12">
-                <div id="keywordEntry" class="text-left text-lg-start">
+                <div class="col-sm-8 col-xs-12">
                     <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="searchTermEntry" name="search" placeholder="Keyword">
-                            <label for="searchTermEntry">Enter Keyword</label>
+                            <!-- This is the user content text-entry -->
+                            <label for="userCopy"></label>
+                            <textarea class="form-control-md" type="text" rows="10" id="userData"></textarea>
                         </div>
-                        <button id="addData" class="w-100 btn btn-primary btn-md" type="submit">Add Keyword</button>
-                        <hr class="my-4">
-                        <button id="clearStorage" class="btn btn-warning btn-sm">Clear all<i id="recycle" class="bi bi-recycle"></i></button>
+                        <div id="searchTermList" class="list-group-horizontal list-group flex-wrap gap-2 ">
+                            <!-- The keywords added by the user will appear here -->
+                        </div>
                     </form>
-
                 </div>
+
             </div>
+        </section>
 
-            <div class="col-sm-8 col-xs-12">
-                <form id="keywordForm" class="p-3 border rounded-1 bg-light" >
-                    <div class="form-floating mb-3">
-                        <label for="userCopy"></label>
-                        <textarea class="form-control-md" type="text" rows="10" id="userData"></textarea>
-                    </div>
-                    <div id="searchTermList" class="list-group-horizontal list-group flex-wrap gap-2 ">
-                        <!-- The keywords added by the user will appear here -->
-                    </div>
-                </form>
+        <section id="about" class="container d-flex flex-column">
+            <div class="row">
+
+                <div class="col">
+                    <h2>Using the keyword counter tool</h2>
+
+                    <p>Using the search-term counter couldn't be easier. You choose where to start; either by adding your keywords one at a time (for now) or simply start writing your search-engine optimised content and add your keywords later. Don't worry about losing your content as it is automatically saved to your browser's memory as you type. As long as you don't delete your browser or clear it's history, your copy should stay there as long as you need it.
+                        <br>
+                    When you add a keyword before entering any content, you'll notice the background colour of the keywords's container is red. This indicates no matches have been found in your content. The background will turn green when a match is found, and the number of occurrences will be updated.
+                    </p>
+
+                    <ol>
+                        <li>Enter your keyword or search term into the keyword box and press enter or hit the 'Add Keyword' button (one at a time for now)</li>
+                        <li>Each search term will appear under the large text entry area</li>
+                        <li>Click 'Clear All' to remove all of the keywords you added (note this removes them from memory too)</li>
+                        <li>Each individual search-term you add can be deleted by clicking the little dustbin icon</li>
+                        <li>Now you can either start writing your content directly into the text box, or do it my way and simply paste a load of content into it for an instant analysis. Then modify as you see fit</li>
+                    </ol>
+
+                    <h2>About the Keyword Density tool</h2>
+
+                    <p>This keyword counting has been created to give SEOs and content-writers the ability to instantly visualise how many times they have used specific keywords and keyphrases. As an SEO myself, I often found myself quickly forgetting what content I have written and getting extremely frustrated with re-reading what I'd written over and over again, desperately trying to keep track of which keywords I have already used and how often. <br>
+                    So this tool aims to take away that frustration. I built it to solve my problem so hopefully, it will help you too.</p>
+                </div>
+
             </div>
+        </section>
 
-        </div>
+        <footer class="align-content-left">
 
-    </section>
+            <h3>Free keyword density counter <span class="fs-6">- by <a href="rob-saunders.co.uk">Rob Saunders Web Development <i class="bi bi-box-arrow-up-right"></i></a></small></h3>
 
-    <section id="about" class="container d-flex flex-column">
-        <div class="row">
+            <p>While I have taken as many steps as I can to ensure the code is bug free, some may be present. I can't accept any liability for any loss or incurred due to use of this free tool. I hope you find it useful</p>
 
-            <div class="col">
+            <p id="copyright"></p>
+            
+            <a href="./terms-and-conditions.html"><p>Terms & Conditions</p></a>
 
-                <h2>Using the keyword counter tool</h2>
-
-                <p>Using the search-term counter couldn't be easier. You choose where to start; either by adding your keywords one at a time (for now) or simply start writing your search-engine optimised content and add your keywords later. Don't worry about losing your content as it is automatically saved to your browser's memory as you type. As long as you don't delete your browser or clear it's history, your copy should stay there as long as you need it.
-                    <br>
-                When you add a keyword before entering any content, you'll notice the background colour of the keywords's container is red. This indicates no matches have been found in your content. The background will turn green when a match is found, and the number of occurrences will be updated.
-                </p>
-
-                <ol>
-                    <li>Enter your keyword or search term into the keyword box and press enter or hit the 'Add Keyword' button (one at a time for now)</li>
-                    <li>Each search term will appear under the large text entry area</li>
-                    <li>Click 'Clear All' to remove all of the keywords you added (note this removes them from memory too)</li>
-                    <li>Each individual search-term you add can be deleted by clicking the little dustbin icon</li>
-                    <li>Now you can either start writing your content directly into the text box, or do it my way and simply paste a load of content into it for an instant analysis. Then modify as you see fit</li>
-                </ol>
-
-                <h2>About the Keyword Density tool</h2>
-
-                <p>This keyword counting has been created to give SEOs and content-writers the ability to instantly visualise how many times they have used specific keywords and keyphrases. As an SEO myself, I often found myself quickly forgetting what content I have written and getting extremely frustrated with re-reading what I'd written over and over again, desperately trying to keep track of which keywords I have already used and how often. <br>
-                So this tool aims to take away that frustration. I built it to solve my problem so hopefully, it will help you too.</p>
-            </div>
-
-        </div>
-
-    </section>
-    <footer class="align-content-left">
-
-        <h3>Free keyword density counter <span class="fs-6">- by <a href="rob-saunders.co.uk">Rob Saunders Web Development <i class="bi bi-box-arrow-up-right"></i></a></small></h3>
-        <p>While I have taken as many steps as I can to ensure the code is bug free, some may be present. I can't accept any liability for any loss or incurred due to use of this free tool. I hope you find it useful</p>
-        <p id="copyright"></p>
-        <a href="./terms-and-conditions.html"><p>Terms & Conditions</p></a>
-
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
-    <script src="./assets/scripts/script.js"></script>
-</body>
+        </footer>
+        
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+        <script src="./assets/scripts/script.js"></script>
+    </body>
 </html>

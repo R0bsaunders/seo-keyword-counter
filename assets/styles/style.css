@@ -14,7 +14,6 @@ header {
 }
 
 footer {
-
     justify-content: center;
     padding: 1em 1em;
     width: 100%;
@@ -35,21 +34,22 @@ footer {
 
 }
 
-/* Buttons */
+/* Add Keyword Button */
 .btn-primary{
     background-color: var(--brandColor) !important;
     border: none !important;
     box-shadow:2px 2px var(--brandColorOpaque);
 }
+
 .btn-primary:hover{
     background-color: var(--brandColorOpaque) !important;
     box-shadow:2px 2px var(--brandColor);
 }
 
+/* The dustbin icon */
 .remove {
     color: var(--brandColor);
     font-size: large;
-
 
 }
 
@@ -61,17 +61,20 @@ footer {
 
 #userData {
     justify-self: end;
-    width: 99%
+    width: 99%;
+
 }
 
 .flex-fill {
     padding: 0.5rem 1rem;
     border-radius: 10px;
     box-shadow:1px 1px black;
+
 }
 
 #searchTermList {
     margin-top: 2vh;
+
 }
 
 #userData {
@@ -79,12 +82,15 @@ footer {
     border-radius: 10px;
     box-shadow:1px 1px grey;
     border-color: var(--brandColor) !important;
+
 }
 
 #recycle {
     margin-left: 2vh;
+
 }
 
 #about {
     margin-top: 5vh;
+    
 }
