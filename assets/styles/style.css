@@ -1,20 +1,24 @@
 :root {
     --brandColor: rgba(69, 9, 116,1);
     --brandColorOpaque: rgba(69, 9, 116,.5);
+
 }
 
 h1, h2 {
     color: var(--brandColor) !important
+
 }
 
 h2 {
     margin-bottom: 2vh !important;
+
 }
 
 header {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 5vh;
+
 }
 
 footer {
@@ -43,11 +47,18 @@ footer {
     background-color: var(--brandColor) !important;
     border: none !important;
     box-shadow:2px 2px var(--brandColorOpaque);
+
 }
 
 .btn-primary:hover{
     background-color: var(--brandColorOpaque) !important;
     box-shadow:2px 2px var(--brandColor);
+
+}
+
+.btn-warning {
+    box-shadow:2px 2px var(--brandColorOpaque);
+    
 }
 
 /* The dustbin icon */
