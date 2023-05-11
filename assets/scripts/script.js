@@ -40,6 +40,7 @@ const addButton = document.querySelector("#addData");
 const clearStorageBtn = document.querySelector("#clearStorage");
 const noTerms = document.createElement('h3');
 const userData = document.querySelector("#userData")
+const d = new Date();
 let searchTerms = [];
 let userCopy = 
     {
@@ -303,5 +304,5 @@ function isPlural(data) {
     }
 }
 
-const d = new Date()
-document.getElementById("copyright").innerHTML = `Copyright ${d.getFullYear()} Rob Saunders UK, All rights reserved `
+// Footer Copyright notice
+document.getElementById("copyright").innerHTML = `Copyright ${d.getFullYear()} Rob Saunders UK, All rights reserved`
