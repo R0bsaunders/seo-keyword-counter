@@ -34,9 +34,11 @@ footer {
 .btn-primary{
     background-color: var(--brandColor) !important;
     border: none !important;
+    box-shadow:2px 2px var(--brandColorOpaque);
 }
 .btn-primary:hover{
     background-color: var(--brandColorOpaque) !important;
+    box-shadow:2px 2px var(--brandColor);
 }
 
 .remove {
@@ -60,7 +62,7 @@ footer {
 .flex-fill {
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    box-shadow:1px 1px grey;
+    box-shadow:1px 1px black;
 }
 
 #searchTermList {

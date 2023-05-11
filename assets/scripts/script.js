@@ -48,8 +48,8 @@ let userCopy =
     };
 
 let searchTermCount = [];
-const styleFound = "background-color: rgba(0, 255, 0, 0.15) !important;transition-duration: 1s;";
-const styleNotFound = "background-color: rgba(255, 0, 0, 0.15) !important;transition-duration: 1s;";
+const styleFound = "background-color: rgba(0, 255, 0, 0.25) !important;transition-duration: 1s;";
+const styleNotFound = "background-color: rgba(255, 0, 0, 0.25) !important;transition-duration: 1s;";
 
 displaySearchTerms();
 displayCopy();
