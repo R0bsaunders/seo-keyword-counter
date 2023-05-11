@@ -11,7 +11,6 @@ let userCopy =
         wordsArray: []
     };
 
-let searchTermCount = [];
 const styleFound = "background-color: rgba(0, 255, 0, 0.25) !important;transition-duration: 1s;";
 const styleNotFound = "background-color: rgba(255, 0, 0, 0.25) !important;transition-duration: 1s;";
 const enterCopyPrompt = "Enter your wonderful copy here"
@@ -179,83 +178,66 @@ function termPresent() {
 
 // Adds the search term to the local storage
 function addTermLocalStorage() {
-    
     userCopy.wordsArray.push(searchTermEntry.value);
     localStorage.setItem("searchTerms", JSON.stringify(userCopy.wordsArray));
     clearSearch();
     displaySearchTerms();
+
 };
 
-// Clears the search box
+// Clears the keyword entry box
 function clearSearch() {
     searchTermEntry.value="";
 
 };
 
-// Function to test if local storage is empty returning false if it is
+// Function to test if local storage keys are empty returning true if it is
 function checkLocalStorage(data) {
-
     if(data == "terms" && !localStorage.searchTerms) {
-
         return true;
 
     } else if(data == "content" && !localStorage.userContent) {
-
         return true;
 
     } else {
-
         return false;
+
     };
 };
 
 // Add user copy to local storage
 function addUserCopy() {
-
     localStorage.setItem("userContent", JSON.stringify(userData.value));
     userCopy.content=userData.value;
+
 };
 
+// Checks for and Calculates the number of matches each keyword is found inside the user's content
 function checkOccurrences() {
 
-    // Check to see if local storage is empty. if not, run check occurrences
-    if(!localStorage.userContent) {
+    // Check to see if local storage is empty. if not, run continue 
+    if(checkLocalStorage("content")) {
         return;
     };
 
-    // Clear searchTerm Variable so it's up to date with correct count
-    searchTermCount = [];
-
-
     // **THIS IS THE MAIN PROCESS THAT CHECKS THE USER SEARCH TERMS AGAINST THE USER CONTENT**
-    
-    userCopy.wordsArray.forEach(element => {
-        
+    userCopy.wordsArray.forEach(userKeyword => {
         // This variable becomes the search term on each array iteration and is converted to RegExp. The \\b...\\b ensures only full word matches are returned positive. This means small words or single letter words like 'a', or' and 'the' will not be returned 
-        var regex = new RegExp(`\\b${element}\\b`, 'gi');
+        var regex = new RegExp(`\\b${userKeyword}\\b`, 'gi');
 
         // This variable becomes an array containing every instance that the search term is found. We then display the array length for the number of times it is found
         const matches = userCopy.content.match(regex);
 
-        // Update global variable
-        var obj = {
-            keyword: `${element}`,
-            count: `${matches?matches.length:0}`
-        };
-        searchTermCount.push(obj);
-
-
-        if(document.getElementById(element)) {
+        if(document.getElementById(userKeyword)) {
+            document.getElementById(userKeyword).innerHTML = `"${userKeyword.toUpperCase()}" is used: ${isPlural(matches?matches.length:0)}`;
             
-            document.getElementById(element).innerHTML = `"${element.toUpperCase()}" is used: ${isPlural(obj.count)}`;
-            
-            if(obj.count > 0) {
+            if(matches?matches.length:0 > 0) {
 
-            document.getElementById(`${element}Style`).setAttribute("style", `${styleFound}`);
+            document.getElementById(`${userKeyword}Style`).setAttribute("style", `${styleFound}`);
 
             } else {
 
-                document.getElementById(`${element}Style`).setAttribute("style", `${styleNotFound}`);
+                document.getElementById(`${userKeyword}Style`).setAttribute("style", `${styleNotFound}`);
 
             };
         };
