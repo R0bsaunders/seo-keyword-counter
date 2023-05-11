@@ -16,7 +16,7 @@ header {
 footer {
 
     justify-content: center;
-padding: 1em 1em;
+    padding: 1em 1em;
     width: 100%;
     background-color: var(--brandColor);
     color: white;

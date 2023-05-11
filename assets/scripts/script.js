@@ -16,6 +16,7 @@ const styleNotFound = "background-color: rgba(255, 0, 0, 0.25) !important;transi
 const enterCopyPrompt = "Enter your wonderful copy here"
 
 // Event listeners
+
 // User Content to detect any key-presses
 userData.addEventListener("keyup", function() {
     addUserCopy();
@@ -218,6 +219,7 @@ function checkOccurrences() {
     // Check to see if local storage is empty. if not, run continue 
     if(checkLocalStorage("content")) {
         return;
+
     };
 
     // **THIS IS THE MAIN PROCESS THAT CHECKS THE USER SEARCH TERMS AGAINST THE USER CONTENT**
@@ -228,33 +230,34 @@ function checkOccurrences() {
         // This variable becomes an array containing every instance that the search term is found. We then display the array length for the number of times it is found
         const matches = userCopy.content.match(regex);
 
-        if(document.getElementById(userKeyword)) {
-            document.getElementById(userKeyword).innerHTML = `"${userKeyword.toUpperCase()}" is used: ${isPlural(matches?matches.length:0)}`;
+        // Gets the current HTML element based on the keyword being checked
+        var liElement = document.getElementById(userKeyword);
+
+        // Change the style of keyword occurrences based on if found or not. Red for not found, green for at least one
+        if(liElement) {
+            liElement.innerHTML = `"${userKeyword.toUpperCase()}" is used: ${isPlural(matches?matches.length:0)}`;
             
             if(matches?matches.length:0 > 0) {
-
-            document.getElementById(`${userKeyword}Style`).setAttribute("style", `${styleFound}`);
+                document.getElementById(`${userKeyword}Style`).setAttribute("style", `${styleFound}`);
 
             } else {
-
                 document.getElementById(`${userKeyword}Style`).setAttribute("style", `${styleNotFound}`);
 
             };
         };
-
-
-
     });        
 };
 
+// Function to return times or time based 0, 1 or greater than one
 function isPlural(data) {
     if(data == 0 || data > 1) {
-        return `${data} times`
+        return `${data} times`;
 
     } else {
-        return `${data} time`
-    }
-}
+        return `${data} time`;
+
+    };
+};
 
 // Footer Copyright notice
 document.getElementById("copyright").innerHTML = `Copyright ${d.getFullYear()} Rob Saunders UK, All rights reserved`
