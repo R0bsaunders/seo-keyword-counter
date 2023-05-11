@@ -7,6 +7,10 @@ h1, h2 {
     color: var(--brandColor) !important
 }
 
+h2 {
+    margin-bottom: 2vh !important;
+}
+
 header {
     display: flex;
     justify-content: flex-start;
@@ -92,5 +96,5 @@ footer {
 
 #about {
     margin-top: 5vh;
-    
+
 }
