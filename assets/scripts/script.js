@@ -166,11 +166,11 @@ function removeAllKeywords() {
 // Check if a keyword has is already present in local storage
 function termPresent() {
 
-    // Check if any data already in local storage
-    wordPresentTest = JSON.parse(localStorage.searchTerms);
+    // Check if any data already in local storage and converting to uppercase to avoid capitalisation duplicates
+    wordPresentTest = JSON.parse(localStorage.searchTerms.toUpperCase());
 
     for (let j = 0; j < wordPresentTest.length; j++) {
-        if (wordPresentTest[j] === searchTermEntry.value) {
+        if (wordPresentTest[j] === searchTermEntry.value.toUpperCase()) {
             return true;
 
         };
