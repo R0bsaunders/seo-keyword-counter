@@ -1,25 +1,18 @@
 :root {
     --brandColor: rgba(69, 9, 116,1);
     --brandColorOpaque: rgba(69, 9, 116,.5);
-
 }
-
-
-
 h2 {
     margin-bottom: 2vh !important;
     color: var(--brandColor) !important;
 }
-
 header {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 8vh;
     background-color: var(--brandColor);
     color: white;
-
 }
-
 footer {
     justify-content: center;
     padding: 1em 1em;
@@ -29,82 +22,55 @@ footer {
     text-align: center;
     margin-top: 5vh;
     margin-bottom: -5vh;
-
 }
-
 #keywordForm {
     background-color: rgba(76, 4, 94, 0.222) !important;
     border: none !important;
     border-radius: 10px !important;
     box-shadow:2px 2px grey;
     margin-bottom: 2vh;
-
 }
-
-/* Add Keyword Button */
 .btn-primary{
     background-color: var(--brandColor) !important;
     border: none !important;
     box-shadow:2px 2px var(--brandColorOpaque);
-
 }
-
 .btn-primary:hover{
     background-color: var(--brandColorOpaque) !important;
     box-shadow:2px 2px var(--brandColor);
-
 }
-
 .btn-warning {
     box-shadow:2px 2px var(--brandColorOpaque);
-    
 }
-
-/* The dustbin icon */
 .remove {
     color: var(--brandColor);
     font-size: large;
-
 }
-
 .remove:hover {
     text-decoration: underline;
     cursor: pointer;
-
 }
-
 #userData {
     justify-self: end;
     width: 99%;
-
 }
-
 .flex-fill {
     padding: 0.5rem 1rem;
     border-radius: 10px;
     box-shadow:1px 1px black;
-
 }
-
 #searchTermList {
     margin-top: 2vh;
-
 }
-
 #userData {
     padding: 0.5rem 1rem;
     border-radius: 10px;
     box-shadow:1px 1px grey;
     border-color: var(--brandColor) !important;
-
 }
-
 #recycle {
     margin-left: 2vh;
-
 }
-
 #about {
     margin-top: 5vh;
-
 }
