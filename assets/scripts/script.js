@@ -260,4 +260,4 @@ function isPlural(data) {
 };
 
 // Footer Copyright notice
-document.getElementById("copyright").innerHTML = `Copyright ${d.getFullYear()} Rob Saunders UK, All rights reserved`
+document.getElementById("copyright").innerHTML = `Copyright ${d.getFullYear()} SEO Keyword Counter | Rob Saunders, UK | All rights reserved`
