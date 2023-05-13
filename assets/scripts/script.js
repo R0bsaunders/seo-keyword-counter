@@ -145,7 +145,7 @@ function termPresent() {
         };
     };
 };
-
+// A Function
 function addTermLocalStorage() {
     userCopy.wordsArray.push(searchTermEntry.value);
     localStorage.setItem("searchTerms", JSON.stringify(userCopy.wordsArray));
