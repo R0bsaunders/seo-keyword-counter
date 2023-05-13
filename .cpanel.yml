@@ -1,8 +1,8 @@
 ---
 deployment:
-  tasks:
-    - export DEPLOYPATH=/home/countmykeywordsc/public_html/
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp sitemap.xml $DEPLOYPATH
-    - /bin/cp terms-and-conditions.html $DEPLOYPATH
-    - /bin/cp -R assets $DEPLOYPATH
+ tasks:
+ - export DEPLOYPATH=/home/countmykeywordsc/public_html/
+ - /bin/cp index.html $DEPLOYPATH
+ - /bin/cp sitemap.xml $DEPLOYPATH
+ - /bin/cp terms-and-conditions.html $DEPLOYPATH
+ - /bin/cp -R assets $DEPLOYPATH
